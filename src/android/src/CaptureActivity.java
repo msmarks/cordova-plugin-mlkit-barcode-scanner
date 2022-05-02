@@ -67,6 +67,7 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
 
     public Integer DetectionTypes;
     public double DetectorSize = .5;
+    public double DetectorRatio = 1.0;
 
     public static final String BarcodeFormat = "MLKitBarcodeFormat";
     public static final String BarcodeType = "MLKitBarcodeType";
@@ -104,9 +105,14 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         // read parameters from the intent used to launch the activity.
         DetectionTypes = getIntent().getIntExtra("DetectionTypes", 1234);
         DetectorSize = getIntent().getDoubleExtra("DetectorSize", .5);
+        DetectorRatio = getIntent().getDoubleExtra("DetectorRatio", 1.0);
 
         if (DetectorSize <= 0 || DetectorSize >= 1) { // setting boundary detectorSize must be between 0 to 1.
             DetectorSize = 0.5;
+        }
+
+        if (DetectorRatio <= 0 || DetectorRatio >= 1) { // setting boundary detectorSize must be between 0 to 1.
+            DetectorRatio = 1.0;
         }
 
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
@@ -340,11 +346,13 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
                 int offset = (int) ((1 - DetectorSize) * diameter);
                 diameter -= offset;
 
+                int diameterHeight = (int) ((double) diameter * DetectorRatio);
+
 
                 left = width / 2 - diameter / 2;
-                top = height / 2 - diameter / 2;
+                top = height / 2 - diameterHeight / 2;
                 right = width / 2 + diameter / 2;
-                bottom = height / 2 + diameter / 2;
+                bottom = height / 2 + diameterHeight / 2;
 
                 boxHeight = bottom - top;
                 boxWidth = right - left;
@@ -412,6 +420,8 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
             int offset = (int) ((1 - DetectorSize) * diameter);
             diameter -= offset;
 
+            int diameterHeight = (int) ((double) diameter * DetectorRatio);
+
             canvas = holder.lockCanvas();
             canvas.drawColor(0, PorterDuff.Mode.CLEAR);
             //border's properties
@@ -421,9 +431,9 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
             paint.setStrokeWidth(5);
 
             left = width / 2 - diameter / 2;
-            top = height / 2 - diameter / 2;
+            top = height / 2 - diameterHeight / 2;
             right = width / 2 + diameter / 2;
-            bottom = height / 2 + diameter / 2;
+            bottom = height / 2 + diameterHeight / 2;
 
             //Changing the value of x in diameter/x will change the size of the box ; inversely proportionate to x
             if (DetectorSize <= 0.3) {
