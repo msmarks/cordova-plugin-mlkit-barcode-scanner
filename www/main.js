@@ -1,3 +1,4 @@
+cordova.define("cordova-plugin-mlkit-barcode-scanner.cordova-plugin-ml-kit-barcode-scanner", function(require, exports, module) {
 const cordova = window.cordova || window.Cordova;
 
 const defaultSettings = Object.freeze({
@@ -75,6 +76,7 @@ function getBarcodeType(type) {
     }
 
     const multiplier = settings.detectorSize;
+    const detectorRatio = settings.detectorRatio;
 /*  const isPortrait = window.innerWidth < window.innerHeight;
     const detectorWidth = multiplier;
     const detectorHeight = isPortrait
@@ -87,6 +89,8 @@ function getBarcodeType(type) {
       detectorType: detectorTypes,
       //Position 2
       detectorSize: multiplier
+      //Position 3
+      DetectorRatio: detectorRatio
     };
     const sendSettings = [];
     for (const key in args) {
@@ -123,3 +127,5 @@ function getBarcodeType(type) {
 
   module.exports = new MLKitBarcodeScanner();
 })();
+
+});
