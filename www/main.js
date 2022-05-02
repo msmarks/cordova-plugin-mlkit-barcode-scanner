@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-mlkit-barcode-scanner.cordova-plugin-ml-kit-barcode-scanner", function(require, exports, module) {
 const cordova = window.cordova || window.Cordova;
 
 const defaultSettings = Object.freeze({
@@ -127,5 +126,3 @@ function getBarcodeType(type) {
 
   module.exports = new MLKitBarcodeScanner();
 })();
-
-});
