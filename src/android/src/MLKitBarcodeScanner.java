@@ -59,6 +59,7 @@ public class MLKitBarcodeScanner extends CordovaPlugin {
         Intent intent = new Intent(context, CaptureActivity.class);
         intent.putExtra("DetectionTypes", args.optInt(0, 1234));
         intent.putExtra("DetectorSize", args.optDouble(1, 0.5));
+        intent.putExtra("DetectorRatio", args.optDouble(2, 18.0 / 85.0));
 
         //intent.putExtra("ViewFinderWidth", args.optDouble(1, .5));
        // intent.putExtra("ViewFinderHeight", args.optDouble(2, .7));
