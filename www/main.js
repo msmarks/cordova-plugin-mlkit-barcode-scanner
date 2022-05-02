@@ -88,7 +88,7 @@ function getBarcodeType(type) {
       //Position 1
       detectorType: detectorTypes,
       //Position 2
-      detectorSize: multiplier
+      detectorSize: multiplier,
       //Position 3
       DetectorRatio: detectorRatio
     };
